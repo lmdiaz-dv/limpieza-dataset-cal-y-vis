@@ -1,0 +1,57 @@
+======================================================================
+RESUMEN DE MÉTRICAS DE CALIDAD DE DATOS — ANTES vs DESPUÉS
+======================================================================
+
+Archivo original: dataset_ventas_tp_5000_lineas_calidad_datos.xlsx
+Archivo limpio:   dataset_ventas_LIMPIO.xlsx
+
+─────────────────────────────── FILAS ────────────────────────────────
+  Filas originales:                   5000
+  Filas duplicadas eliminadas:            7
+  Filas en dataset limpio:             4993
+
+────── COLUMNAS CATEGÓRICAS — valores nulos / sin estandarizar ───────
+  Columna            Nulos antes   Nulos después   Variación
+  ----------------------------------------------------------
+  medio_pago                 819             818          -1
+  sucursal                   990             989          -1
+  categoria                  833            1255        +422
+  estado_envio              1090            1088          -2
+  vendedor                   954            1451        +497
+
+  Nota: en 'antes' se cuentan nulos reales (NaN) + strings vacíos.
+  En 'después' se cuentan los valores que quedaron en blanco ('')
+  por ser nulos originales o por no encajar en ninguna categoría válida.
+
+─────────────────────────────── FECHA ────────────────────────────────
+  Nulas en el original:                  61
+  Con formato inválido (no nulas):      119
+  Total nulas/NaT después:              180
+
+─── COLUMNAS NUMÉRICAS — valores inválidos detectados y corregidos ───
+  Columna            Nulos antes  Texto inv.  Negativos   Ceros  Nulos después
+  ----------------------------------------------------------------------------
+  cantidad                   111          44         64      33            207
+  precio_unitario            117          44         62      36            215
+  total                      497          68        201     150            847
+
+  [descuento] — debe estar en el rango [0, 100]
+    Nulos antes:                         92
+    Valores fuera de [0, 100]:            53
+    Nulos después:                      145
+
+── TOTAL GENERAL DE NULOS/INVÁLIDOS (todas las columnas relevadas) ───
+  Total antes:                         5564
+  Total después:                       7195
+  Variación:                          +1631
+
+  Nota: el total 'después' suele ser mayor que el total 'antes'
+  porque varios valores que originalmente parecían válidos
+  (texto fuera de lista, números negativos/cero, fechas con
+  formato imposible, etc.) se detectan como inválidos durante
+  la limpieza y se convierten explícitamente en nulos, en lugar
+  de dejarlos como datos incorrectos silenciosos.
+
+======================================================================
+Fin del resumen.
+======================================================================
